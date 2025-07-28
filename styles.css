@@ -1,38 +1,74 @@
 :root {
-  --bg: #ffffff;
-  --text: #000000;
-  --card: #f5f5f5;
+  --bg: #f0f2f5;
+  --text: #1c1e21;
+  --card: rgba(255, 255, 255, 0.75);
+  --highlight: #4CAF50;
+  --border: rgba(0, 0, 0, 0.05);
+  --glass: blur(20px);
+  --font: 'Poppins', sans-serif;
 }
 
 body.dark {
   --bg: #121212;
-  --text: #ffffff;
-  --card: #1e1e1e;
+  --text: #f5f5f5;
+  --card: rgba(32, 32, 32, 0.8);
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 body {
-  font-family: sans-serif;
+  font-family: var(--font);
   background-color: var(--bg);
   color: var(--text);
-  padding: 20px;
   margin: 0;
-  transition: background 0.3s, color 0.3s;
+  padding: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-.upload-label, #clearAll, #toggleTheme {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 16px;
-  margin: 10px;
+header h1 {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.theme-toggle button {
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--card);
+  backdrop-filter: var(--glass);
+  cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+input, select, button, label.upload-label {
+  font-family: var(--font);
+  padding: 10px 14px;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  background: var(--card);
+  backdrop-filter: var(--glass);
+  color: var(--text);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+button:hover, .upload-label:hover {
+  background-color: var(--highlight);
+  color: white;
 }
 
 #fileInput {
@@ -40,33 +76,40 @@ header {
 }
 
 #dropZone {
-  border: 2px dashed #aaa;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
   padding: 30px;
-  margin: 20px auto;
   text-align: center;
-  max-width: 600px;
-  border-radius: 10px;
+  margin-bottom: 30px;
+  transition: border-color 0.3s ease;
+}
+
+#dropZone.highlight {
+  border-color: var(--highlight);
 }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  max-width: 1000px;
-  margin: auto;
 }
 
 .image-card {
   background: var(--card);
-  padding: 10px;
-  border-radius: 10px;
-  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  padding: 12px;
   text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.image-card:hover {
+  transform: scale(1.03);
 }
 
 .image-card img {
   width: 100%;
-  height: 150px;
+  height: 160px;
   object-fit: cover;
   border-radius: 8px;
   cursor: pointer;
@@ -74,30 +117,36 @@ header {
 
 .image-card textarea {
   width: 100%;
-  margin-top: 8px;
-  padding: 5px;
-  border-radius: 5px;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
   resize: none;
   font-size: 14px;
 }
 
 .image-card button {
-  margin: 5px 2px;
+  margin: 5px 4px;
   padding: 6px 10px;
+  background-color: #eee;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
 }
 
+.image-card button:hover {
+  background-color: #ddd;
+}
+
 .lightbox {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 999;
 }
 
 .lightbox img {
