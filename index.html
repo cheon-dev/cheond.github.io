@@ -3,25 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Advanced Photo Gallery</title>
-  <link rel="stylesheet" href="styles.css"/>
+  <title>Smart Photo Gallery</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>📷 My Smart Photo Gallery</h1>
-    <button id="toggleTheme">🌓 Toggle Dark Mode</button>
+    <h1>📸 Smart Photo Gallery</h1>
+    <div class="theme-toggle">
+      <button id="toggleTheme">🌓</button>
+    </div>
   </header>
 
   <div class="controls">
+    <select id="albumSelect"></select>
+    <input type="text" id="newAlbumName" placeholder="➕ New Album Name" />
+    <button id="createAlbum">Add Album</button>
+
     <input type="file" id="fileInput" multiple accept="image/*">
-    <label for="fileInput" class="upload-label">📁 Upload Images</label>
+    <label for="fileInput" class="upload-label">📁 Upload to Album</label>
+
+    <input type="text" id="searchInput" placeholder="🔍 Search description">
     <button id="clearAll">🗑️ Clear All</button>
   </div>
 
   <div id="dropZone">📥 Drag & Drop Images Here</div>
   <div class="gallery" id="gallery"></div>
 
-  <!-- Lightbox Preview -->
   <div class="lightbox" id="lightbox">
     <img id="lightbox-img" src="" alt="">
   </div>
