@@ -20,8 +20,10 @@
     <input type="text" id="newAlbumName" placeholder="➕ New Album Name" />
     <button id="createAlbum">Add Album</button>
 
-    <input type="file" id="fileInput" multiple accept="image/*">
+    <input type="file" id="fileInput" multiple accept="image/*" capture="environment">
     <label for="fileInput" class="upload-label">📁 Upload to Album</label>
+
+    <button id="takePhoto">📷 Take Photo</button>
 
     <input type="text" id="searchInput" placeholder="🔍 Search description">
     <button id="clearAll">🗑️ Clear All</button>
@@ -30,9 +32,16 @@
   <div id="dropZone">📥 Drag & Drop Images Here</div>
   <div class="gallery" id="gallery"></div>
 
+  <!-- Slideshow Lightbox -->
   <div class="lightbox" id="lightbox">
+    <button class="nav-btn" id="prevSlide">◀</button>
     <img id="lightbox-img" src="" alt="">
+    <button class="nav-btn" id="nextSlide">▶</button>
+    <button id="playPauseSlide">⏯️</button>
   </div>
+
+  <video id="camera" autoplay playsinline></video>
+  <canvas id="snapshotCanvas" style="display:none;"></canvas>
 
   <script src="script.js"></script>
 </body>
