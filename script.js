@@ -1,4 +1,5 @@
 const fileInput = document.getElementById("fileInput");
+const cameraInput = document.getElementById("cameraInput"); // NEW
 const gallery = document.getElementById("gallery");
 const clearAll = document.getElementById("clearAll");
 const dropZone = document.getElementById("dropZone");
@@ -57,6 +58,8 @@ albumSelect.addEventListener("change", () => {
 searchInput.addEventListener("input", renderGallery);
 
 fileInput.addEventListener("change", handleFiles);
+cameraInput.addEventListener("change", handleFiles); // NEW
+
 dropZone.addEventListener("dragover", e => {
   e.preventDefault();
   dropZone.classList.add("highlight");
@@ -81,6 +84,7 @@ function handleFiles(e) {
     }
   });
   fileInput.value = "";
+  cameraInput.value = "";
 }
 
 function renderGallery() {
@@ -161,19 +165,21 @@ function toggleSlideshow() {
   }
 }
 
-// Camera support
+// ✅ NEW: Native camera input trigger
+takePhotoBtn.addEventListener("click", () => {
+  cameraInput.click();
+});
+
+// Existing getUserMedia-based camera remains untouched below
+// You can remove this section if you no longer need it
 takePhotoBtn.addEventListener("click", async () => {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    alert("Camera not supported on this device.");
-    return;
-  }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
 
   try {
     camera.style.display = "block";
     stream = await navigator.mediaDevices.getUserMedia({ video: true });
     camera.srcObject = stream;
 
-    // Wait for click on camera to take photo
     camera.onclick = () => {
       const context = canvas.getContext("2d");
       canvas.width = camera.videoWidth;
@@ -184,12 +190,10 @@ takePhotoBtn.addEventListener("click", async () => {
       images.unshift({ src: imageDataUrl, note: "", album: currentAlbum });
       save();
       renderGallery();
-
       stopCamera();
     };
   } catch (error) {
     console.error("Camera error:", error);
-    alert("Failed to access camera.");
   }
 });
 
