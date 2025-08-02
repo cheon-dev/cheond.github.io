@@ -23,6 +23,8 @@
     <input type="file" id="fileInput" multiple accept="image/*">
     <label for="fileInput" class="upload-label">📁 Upload to Album</label>
 
+    <!-- NEW: Hidden input for native camera -->
+    <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;">
     <button id="takePhoto">📷 Take Photo</button>
 
     <input type="text" id="searchInput" placeholder="🔍 Search description">
